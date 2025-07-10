@@ -48,8 +48,40 @@
       <button>Signup</button>
      </form>
 
+      
+     
+        <h3>Update User</h3>
 
+        <?php
+        session_start();
+        $user = $_SESSION['user'] ?? ['id' => '', 'usern' => '', 'email' => ''];
+        $message = $_SESSION['message'] ?? '';
+        unset($_SESSION['user'], $_SESSION['message']);
+        ?>
+
+        <?php if ($message): ?>
+            <p style="color:red"><?= htmlspecialchars($message) ?></p>
+        <?php endif; ?>
+
+        <form action="db/userupdate.php" method="post">
+            <input type="number" name="id" placeholder="ID" value="<?= htmlspecialchars($user['id']) ?>"><br><br>
+            <input type="text" name="username" placeholder="Username" value="<?= htmlspecialchars($user['usern']) ?>"><br><br>
+            <input type="password" name="password" placeholder="Password (leave blank to keep current password)"><br><br>
+            <input type="email" name="email" placeholder="Email" value="<?= htmlspecialchars($user['email']) ?>"><br><br>
+
+            <button type="submit" name="search">Search</button>
+            <button type="submit" name="update">Update</button>
+        </form>
+
+        
+
+     <h3>Delete User</h3>
+     <form action="db/userdelete.php">
+      <input type="text" name="username" placeholder="Username">
+      <button>Delete</button>
      </form>
+
+
 
    
 <!-- 

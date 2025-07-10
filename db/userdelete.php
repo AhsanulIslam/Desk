@@ -8,10 +8,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST"){
     try { 
         require_once "dbcont.php"; // Include the database connection file
 
-        $query = "INSERT INTO users(usern, pwd, email) values( ?, ?, ?)";
+        $query = "delete from users where usern = :username";
+        
         $stmt = $conn->prepare($query);
 
-        $stmt->execute([$username, $password, $email]);
+        $stmt->bindParam(':username', $username);
+    
+
+        $stmt->execute();
 
         $conn = null; // Close the database connection
         $stmt = null; // Close the prepared statement
